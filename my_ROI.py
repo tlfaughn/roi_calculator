@@ -1,11 +1,11 @@
-# Define a class representing a rental property
+# class representing a rental property
 class RentalProperty:
     def __init__(self, rental_income, laundry_income,
-                 storage_income, tax, insurance, 
-                 utilities, hoa, vacancy, 
-                 repairs, capital_exchange, management, 
-                 mortgage_costs):
-        # Initialize the RentalProperty object with provided monthly inputs
+                 storage_income, tax, insurance,
+                 utilities, hoa, vacancy,
+                 repairs, capital_exchange, management,
+                 mortgage_costs, apr):
+        # Create the RentalProperty object with monthly inputs
         self.rental_income = rental_income
         self.laundry_income = laundry_income
         self.storage_income = storage_income
@@ -20,13 +20,16 @@ class RentalProperty:
             'management': management,
             'mortgage_costs': mortgage_costs
         }
+        self.apr = apr
 
     # Calculate the net cash flow of the property on an annual basis
     def calculate_cash_flow(self):
-        total_income = 12 * (self.rental_income + 
-                             self.laundry_income + 
+        total_income = 12 * (self.rental_income +
+                             self.laundry_income +
                              self.storage_income)
         total_expenses = 12 * sum(self.expenses.values())
+        monthly_interest = (self.apr / 100) * self.expenses['mortgage_costs']
+        total_expenses += 12 * monthly_interest
         return total_income - total_expenses
 
     # Calculate and return the Return on Investment (ROI) as an annual percentage
@@ -61,10 +64,11 @@ def get_user_input():
     capital_exchange = get_float_input("Monthly capital exchange costs: $")
     management = get_float_input("Monthly property management fees: $")
     mortgage_costs = get_float_input("Monthly mortgage costs: $")
+    apr = get_float_input("Mortgage APR (Annual Percentage Rate): %")
 
-    return (rental_income, laundry_income, storage_income, tax, insurance, 
+    return (rental_income, laundry_income, storage_income, tax, insurance,
             utilities, hoa, vacancy, repairs, capital_exchange, management,
-            mortgage_costs)
+            mortgage_costs, apr)
 
 
 # Main program execution
@@ -79,9 +83,9 @@ def main():
         if user_input.replace('.', '', 1).isdigit():
             initial_investment = float(user_input)
             if initial_investment <= 0:
-                print("Invalid input. Please enter a positive dollar ammount.")
+                print("Invalid input. Please enter a positive dollar amount.")
         else:
-            print("Invalid input. Please enter a positive dollar ammount.")
+            print("Invalid input. Please enter a positive dollar amount.")
 
     property1 = RentalProperty(*user_inputs)
     roi_property1 = property1.calculate_roi(initial_investment)
