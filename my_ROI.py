@@ -39,7 +39,7 @@ class RentalProperty:
 
 
 # Function to get user input for monthly details of the rental property
-def get_float_input(prompt):
+def floatput(prompt):
     while True:
         user_input = input(prompt)
         if user_input.replace('.', '', 1).isdigit():
@@ -49,22 +49,22 @@ def get_float_input(prompt):
 
 
 # Function to get user input for monthly details of the rental property
-def get_user_input():
+def user_input():
     print("Please provide monthly details for your rental property:")
 
-    rental_income = get_float_input("Monthly rental income: $")
-    laundry_income = get_float_input("Monthly laundry income: $")
-    storage_income = get_float_input("Monthly storage income: $")
-    tax = get_float_input("Monthly property tax: $")
-    insurance = get_float_input("Monthly insurance cost: $")
-    utilities = get_float_input("Monthly utilities cost: $")
-    hoa = get_float_input("Monthly HOA (Homeowners Association) fees: $")
-    vacancy = get_float_input("Estimated monthly vacancy costs: $")
-    repairs = get_float_input("Estimated monthly repairs and maintenance costs: $")
-    capital_exchange = get_float_input("Monthly capital exchange costs: $")
-    management = get_float_input("Monthly property management fees: $")
-    mortgage_costs = get_float_input("Monthly mortgage costs: $")
-    apr = get_float_input("Mortgage APR (Annual Percentage Rate): %")
+    rental_income = floatput("Monthly rental income: $")
+    laundry_income = floatput("Monthly laundry income: $")
+    storage_income = floatput("Monthly storage income: $")
+    tax = floatput("Monthly property tax: $")
+    insurance = floatput("Monthly insurance cost: $")
+    utilities = floatput("Monthly utilities cost: $")
+    hoa = floatput("Monthly HOA (Homeowners Association) fees: $")
+    vacancy = floatput("Estimated monthly vacancy costs: $")
+    repairs = floatput("Estimated monthly repairs and maintenance costs: $")
+    capital_exchange = floatput("Monthly capital exchange costs: $")
+    management = floatput("Monthly property management fees: $")
+    mortgage_costs = floatput("Monthly mortgage costs: $")
+    apr = floatput("Mortgage APR (Annual Percentage Rate): %")
 
     return (rental_income, laundry_income, storage_income, tax, insurance,
             utilities, hoa, vacancy, repairs, capital_exchange, management,
@@ -75,7 +75,7 @@ def get_user_input():
 def main():
     # Get user inputs with input validation, create a RentalProperty object,
     # calculate ROI, and print the result
-    user_inputs = get_user_input()
+    user_inputs = user_input()
 
     initial_investment = 0
     while initial_investment <= 0:
